@@ -1,28 +1,28 @@
 start:
-        mov ax, cs
-        mov ds, ax
+  mov ax, cs
+  mov ds, ax
 
-        ; --- ;
+  ; --- ;
 
-        mov si, hello_string
-        call print_string
+  mov si, hello_string
+  call print_string
 
-        jmp $
+  jmp $
 
 print_string:
-        mov ah, 0Eh
+  mov ah, 0Eh
 
 print_char:
-        lodsb
+  lodsb
 
-        cmp al, 0
-        je done
+  cmp al, 0
+  je done
 
-        int 10h
+  int 10h
 
-        jmp print_char
+  jmp print_char
 
 done:
-        ret
+  ret
 
 hello_string db ´Hello world from your super complex kernel´, 0
