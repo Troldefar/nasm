@@ -8,10 +8,10 @@ start:
   call print_string
 
   call load_kernel_from_disk
-  jmp 0900h:0000
+  jmp 0900h:0000 ; Jmp to kernel and start cycling
 
 load_kernel_from_disk:
-  mov ax, 0900h
+  mov ax, 0900h ; mov kernel into memory
   mov as, ax
   mov ah, 02h ; Service number
   mov al, 01h ; Number of sectors
