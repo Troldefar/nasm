@@ -1,3 +1,6 @@
+number_of_sectors_to_load db 15d
+curr_sector_to_load	   db 2d
+
 start:
   mov ax, 07C0H
   mov ds, ax
@@ -11,18 +14,30 @@ start:
   jmp 0900h:0000 ; Jmp to kernel and start cycling
 
 load_kernel_from_disk:
-  mov ax, 0900h ; mov kernel into memory
-  mov as, ax
-  mov ah, 02h ; Service number
-  mov al, 01h ; Number of sectors
-  mov ch, 0h  ; Track number
-  mov cl, 02h ; Sector number
-  mov dh, 0h  ; Head number
-  mov dl, 80h ; Disk type
-  mov bx, 0h  ; Load into
+  mov ax, [curr_sector_to_load]
+  sub ax, 2
+  mov bx, 512d
+  mul bx
+  mov bx, ax
+
+  mov ah, 0900h
+  mov es, ax
+
+  mov ah, 02h
+  mov al, 1h
+  mov ch, 0h
+  mov cl, [curr_sector_to_load]
+  mov dh, 0h
+  mov dl, 80h
   int 13h
 
   jc kernel_load_error
+  
+  sub byte [number_of_sectors_to_load], 1
+  add byte [curr_sector_to_load], 1
+  cmp byte [number_of_sectors_to_load], 0    
+
+  jne load_kernel_from_disk
 
   ret
 
