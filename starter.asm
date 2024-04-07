@@ -50,7 +50,7 @@ start_kernel:
   mov fs, eax
   mov gs, eax
 
-  sti
+  sti ; Reeanble interrupts
 
   call kernel_main
 
