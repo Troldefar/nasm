@@ -52,3 +52,8 @@ remap_pic: ; Routine for changing default mapping on interrupt numbers @ PIC
 		mov 0xa1, al
 
 	ret
+
+load_idt:
+  lidt [idtr - start]
+  
+  ret

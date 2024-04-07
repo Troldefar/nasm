@@ -1,5 +1,6 @@
 bits 16 ; Real mode for now
 extern kernel_main ; Symbol
+extern interrupt_handler
 
 start:
 	mov ax, cs
@@ -55,3 +56,4 @@ start_kernel:
   call kernel_main
 
 %include "gdm.asm"
+%include "idt.asm"
