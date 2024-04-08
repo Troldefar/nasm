@@ -75,10 +75,11 @@ printing_finished:
 
   ret
 
-title_string db ´The bootloader of troldefarkernel.´, 0
-message_stirng db ´The kernel is loading...´, 0
-load_error_string db ´Kernel could not be loaded´, 0
+title_string db `The bootloader of troldefarkernel.`, 0
+message_stirng db `The kernel is loadin`...`, 0
+load_error_string db `Kernel could not be loaded`, 0
 
 times 510-($-$$) db 0
 
 dw 0xAA55
+`

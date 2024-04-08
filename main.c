@@ -24,10 +24,10 @@ void print(char *str) {
 	int currCharLocationInVideoMem, currColorLocationInVidMem;
 
 	while (*str != '\0') {
-		currCharLocationInVidMem = nextTextPos * 2;
-		currColorLocationInVidMem = currCharLocationInVidMem + 1;
+		currCharLocationInVideoMem = nextTextPos * 2;
+		currColorLocationInVidMem = currColorLocationInVidMem + 1;
 
-		video[currCharLocationInVidMem] = *str;
+		video[currCharLocationInVideoMem] = *str;
 		video[currColorLocationInVidMem] = WHITE_COLOR;
 
 		nextTextPos++;
