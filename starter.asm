@@ -1,6 +1,8 @@
 bits 16 ; Real mode for now
 extern kernel_main ; Symbol
 extern interrupt_handler
+extern scheduler
+extern run_next_process
 
 start:
 	mov ax, cs

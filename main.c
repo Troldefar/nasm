@@ -1,5 +1,5 @@
 #include "screen.h"
-#include "process.h"
+#include "scheduler.h"
 
 void print(char*);
 void println();
@@ -8,6 +8,7 @@ void printi(int);
 void kernel_main() {
 	screen_init();
 	process_init();
+	scheduler_init();
 	print("troldefar kernel");
 	println();
 	print("proc mode");
