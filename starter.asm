@@ -10,6 +10,7 @@ start:
 	call init_video_mode ; Use VGA since we'll enter protected mode where BIOS is meh
 	call enter_protected_mode
 	call setup_interrupts
+  call load_task_register
 
 	call 08h:start_kernel
 
@@ -40,6 +41,12 @@ init_video_mode:
 
   ret
 
+load_task_register:
+  mov ax, 40d ; 40d since (6 entries * 8 bytes) - 8 (since indexing starts at 0)
+  ltr ax
+
+  ret
+
 bits 32
 start_kernel:
   mov eax, 10h
@@ -57,3 +64,6 @@ start_kernel:
 
 %include "gdm.asm"
 %include "idt.asm"
+
+tss: ; Task state segment
+  dd 0
