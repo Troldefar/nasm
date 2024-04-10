@@ -12,7 +12,7 @@ void kernel_main() {
 	println();
 	print("proc mode");
 	println();
-	printi(420);
+	printi(42069);
 	println();
 
 	while(1);
