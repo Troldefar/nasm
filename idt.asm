@@ -163,7 +163,7 @@ isr_32:
 	
 	cli
 	
-	pusha ; Store the context of current process
+	pusha ; Store the context of current process registers
 	
 	mov eax, [esp + 32] ; EIP before interrupt. Could be the EIP of the current process
 	push eax  
