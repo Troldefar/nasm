@@ -1,7 +1,7 @@
 int processes_count, curr_pid;
 
 void process_init();
-void process_create(int *, process_t *);
+process_t *process_create(int *);
 
 typedef enum process_state {READY, RUNNING} process_state_t;
 

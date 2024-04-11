@@ -1,3 +1,8 @@
+/**
+ * Main
+*/
+
+#include "heap.h"
 #include "screen.h"
 #include "scheduler.h"
 
@@ -6,12 +11,13 @@ void println();
 void printi(int);
 
 void kernel_main() {
+	heap_init();
 	screen_init();
 	process_init();
 	scheduler_init();
 	print("troldefar kernel");
 	println();
-	print("proc mode");
+	print("protected mode");
 	println();
 	printi(42069);
 	println();

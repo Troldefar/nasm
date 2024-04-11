@@ -20,7 +20,9 @@ void process_init_registers_general_purpose_registers(process_t *process) {
     process->context.edi = 0;
 }
 
-void process_create(int *base_address, process_t *process) {
+process_t *process_create(int *base_address) {
+
+    process_t *process = kalloc(sizeof(process_t));
 
     process->pid = curr_pid++;
     process_init_registers_general_purpose_registers(process);
@@ -30,5 +32,8 @@ void process_create(int *base_address, process_t *process) {
     process->base_address = base_address;
     
     processes[process->pid] = process;
+    
     processes_count++;
+
+    return process;
 }
