@@ -14,6 +14,8 @@ build: \
     $(CC) $(KERNEL_FLAGS) screen.c -o screen.elf \
     $(CC) $(KERNEL_FLAGS) process.c -o process.elf \
     $(CC) $(KERNEL_FLAGS) scheduler.c -o scheduler.elf \
+    $(CC) $(KERNEL_FLAGS) heap.c -o heap.elf \
+    $(CC) $(KERNEL_FLAGS) paging.c -o paging.elf \
     ld -melf_i386 -Tlinker.ld starter.o kernel.elf screen.elf process.elf scheduler.elf -o troldefarkernel.elf \
     objcopy -O binary troldefarkernel.elf troldefarkernel.bin \
     dd if=bootstrap.o of=kernel.img \

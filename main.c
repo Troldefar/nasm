@@ -5,6 +5,7 @@
 #include "heap.h"
 #include "screen.h"
 #include "scheduler.h"
+#include "paging.h"
 
 void print(char*);
 void println();
@@ -12,6 +13,7 @@ void printi(int);
 
 void kernel_main() {
 	heap_init();
+	paging_init();
 	screen_init();
 	process_init();
 	scheduler_init();

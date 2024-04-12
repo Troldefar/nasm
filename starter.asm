@@ -1,8 +1,12 @@
 bits 16 ; Real mode for now
+extern page_directory
 extern kernel_main ; Symbol
 extern interrupt_handler
 extern scheduler
 extern run_next_process
+
+global load_page_directory
+global enable_paging
 
 start:
 	mov ax, cs
@@ -63,6 +67,19 @@ start_kernel:
   sti ; Reeanble interrupts
 
   call kernel_main
+
+load_page_directory:
+  mov eax, [page_directory]
+  mov cr3, eax
+
+  ret
+
+enable_paging:
+  mov eax, cr0
+  or eax 80000000h ; Or the value of the cr0 register to switch it to 1 and put it back = paging enabled
+  mov cr0, eax
+
+  ret
 
 %include "gdm.asm"
 %include "idt.asm"
