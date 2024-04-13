@@ -7,6 +7,9 @@ extern run_next_process
 
 global load_page_directory
 global enable_paging
+global dev_write
+global dev_write_word
+global dev_read
 
 start:
 	mov ax, cs
@@ -54,6 +57,69 @@ load_task_register:
   ret
 
 bits 32
+
+dev_write: ; Boot functionality for OUT and IN device drivers with 8 bit ( al )
+  push edx
+  push eax
+
+  ; Clear
+
+  xor edx, edx
+  xor eax, eax
+
+  ; Set parameters
+
+  mov dx, [esp + 12]
+  mov al, [esp + 16]
+
+  out dx, al ; Send value of al to dx which enables us to send cmds to a device on some port
+
+  ; Restore previous state
+
+  pop eax
+  pop edx
+
+  ret
+
+dev_write_word: ; Boot functionality for OUT and IN device drivers with 16 bits ( ax )
+  push edx
+  push eax
+
+  ; Clear
+
+  xor edx, edx
+  xor eax, eax
+
+  ; Set parameters
+
+  mov dx, [esp + 12]
+  mov al, [esp + 16]
+
+  out dx, ax ; Send value of al to dx which enables us to send cmds to a device on some port
+
+  ; Restore previous state
+
+  pop eax
+  pop edx
+
+  ret
+
+dev_read: ; Read
+  push edx
+
+  ; Clear
+
+  xor edx, edx
+  xor eax, eax
+
+  mox dx, [esp + 8]
+
+  in ax, dx
+
+  pop edx
+  
+  ret
+
 start_kernel:
   mov eax, 10h
   mov ds, eax
