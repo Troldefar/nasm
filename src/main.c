@@ -2,12 +2,12 @@
  * Main
 */
 
-#include "heap.h"
-#include "screen.h"
-#include "scheduler.h"
-#include "paging.h"
-#include "ata.h"
-#include "filesystem.h"
+#include "memory/heap.h"
+#include "utils/screen.h"
+#include "scheduler/scheduler.h"
+#include "memory/paging.h"
+#include "disk/ata.h"
+#include "filesystem/filesystem.h"
 
 void print(char*);
 void println();
