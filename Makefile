@@ -2,7 +2,7 @@ ASM = nasm
 CC = gcc
 BOOTSTRAP_FILE = bootstrap.asm
 INIT_KERNEL_FILES = starter.asm
-KERNEL_FILES = main.c
+KERNEL_FILES = src/main.c
 KERNEL_FLAGS = -Wall -m32 -c -ffreestanding -fno-asynchronous-unwind-tables -fno-pie
 KERNEL_OBJECT = -o kernel.elf
 
