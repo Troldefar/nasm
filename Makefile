@@ -16,9 +16,12 @@ build: \
     $(CC) $(KERNEL_FLAGS) scheduler.c -o scheduler.elf \
     $(CC) $(KERNEL_FLAGS) heap.c -o heap.elf \
     $(CC) $(KERNEL_FLAGS) paging.c -o paging.elf \
-    ld -melf_i386 -Tlinker.ld starter.o kernel.elf screen.elf process.elf scheduler.elf -o troldefarkernel.elf \
+    $(CC) $(KERNEL_FLAGS) ata.c -o ata.elf \
+    $(CC) $(KERNEL_FLAGS) str.c -o str.elf \
+    $(CC) $(KERNEL_FLAGS) filesystem.c -o filesystem.elf \
+    ld -melf_i386 -Tlinker.ld starter.o kernel.elf screen.elf process.elf scheduler.elf heap.elf paging.elf ata.elf str.elf filesystem.elf -o troldefarkernel.elf \
     objcopy -O binary troldefarkernel.elf troldefarkernel.bin \
     dd if=bootstrap.o of=kernel.img \
-    dd seek=1 conv=sync if=troldefarkernel.bin of=kernel.img bs=512 count=8 \
-    dd seek=9 conv=sync if=/dev/zero of=kernel.img bs=512 count=2046 \
+    dd seek=1 conv=sync if=troldefarkernel.bin of=kernel.img bs=512 count=20 \
+    dd seek=21 conv=sync if=/dev/zero of=kernel.img bs=512 count=2046 \
     qemu-system-x86_64 -s kernel.img

@@ -6,6 +6,8 @@
 #include "screen.h"
 #include "scheduler.h"
 #include "paging.h"
+#include "ata.h"
+#include "filesystem.h"
 
 void print(char*);
 void println();
@@ -17,6 +19,7 @@ void kernel_main() {
 	screen_init();
 	process_init();
 	scheduler_init();
+	filesystem_init();
 	print("troldefar kernel");
 	println();
 	print("protected mode");
